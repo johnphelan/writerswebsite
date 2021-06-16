@@ -1,7 +1,13 @@
 {% extends "blog/base.html" %}
 {% block content %}
-		<h1>About Page</h1>
-		<img src="{{post.image.url}}" alt="img">
+{% load static %}
+<article class="media content-section">	
+	<h1>About Page</h1>
+		<div>
+			<img class="square" src="https://phelanstorage1.s3.us-east-2.amazonaws.com/northernlights.jpg">
+		</div>
+</article>
+
 {% endblock content %}
 
 

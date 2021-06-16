@@ -9,6 +9,15 @@ class Profile(models.Model):
 	def __str__(self):
 		return f'{self.user.username} Profile'
 
+
+class Defaulter(models.Model):
+	image = models.ImageField(default='default.jpg')
+
+	def __str__(self):
+		return f'{self.user.username} Defaulter'
+
+
+
 	#def save(self):
 	#	super().save()
 	#
