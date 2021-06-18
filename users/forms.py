@@ -21,3 +21,9 @@ class ProfileUpdateForm(forms.ModelForm):
 	class Meta:
 		model = Profile
 		fields = ['image']
+
+class BiographyForm(forms.ModelForm):
+
+	class Meta:
+		model = Profile
+		fields = ['bio']
