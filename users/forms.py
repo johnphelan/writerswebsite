@@ -27,3 +27,8 @@ class BiographyForm(forms.ModelForm):
 	class Meta:
 		model = Profile
 		fields = ['bio']
+
+class AccessCodeForm(forms.Form):
+	accesscode = forms.CharField(label='ACCESS CODE', max_length=100)
+
+

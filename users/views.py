@@ -1,20 +1,42 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BiographyForm 
-
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView
+from django.contrib.auth.models import User
+from .forms import(
+	 UserRegisterForm,
+	 UserUpdateForm,
+	 ProfileUpdateForm,
+	 BiographyForm,
+	 AccessCodeForm
+ )
+from django.apps import apps
+Post = apps.get_model('blog', 'Post')
 
 def register(request):
 	if request.method == 'POST':
-		form = UserRegisterForm(request.POST)
-		if form.is_valid():
-			form.save()
-			username = form.cleaned_data.get('username')
-			messages.success(request, f'Your account has been created! Login in pls!')
-			return redirect('login')
+		form1 = UserRegisterForm(request.POST)
+		form2 = AccessCodeForm(request.POST)
+		if form2.is_valid() and form1.is_valid():
+			accesscode = form2.cleaned_data.get('accesscode')
+			if accesscode == 'WRITETODAY':
+				form1.save()
+				username = form1.cleaned_data.get('username')
+				messages.success(request, f'Your account has been created! Login in pls!')
+				return redirect('login')
+			else:
+				messages.warning(request,f'WRONG ACCESS CODE')
 	else:
-		form = UserRegisterForm()
-	return render(request, 'users/register.html', {'form': form})
+		form1 = UserRegisterForm()
+		form2 = AccessCodeForm()
+		
+	context = {
+		'form1': form1,
+		'form2': form2
+		
+	}
+	return render(request, 'users/register.html', context)
 
 @login_required
 def profile(request):
@@ -29,7 +51,7 @@ def profile(request):
 			p_form.save()
 			b_form.save()
 			messages.success(request, f'Your account has been updated!')
-			return redirect('profile')
+			return redirect('editprofile')
 
 	else:
 		u_form = UserUpdateForm(instance=request.user)
@@ -42,6 +64,20 @@ def profile(request):
 		'b_form': b_form
 	}
 
-	return render(request, 'users/profile.html', context)
+	return render(request, 'users/editprofile.html', context)
+
+
+class ProfileListView(ListView):
+	model = Post
+	template_name = 'users/profile.html' # <app>/<model>_<viewtype>.html
+	context_object_name = 'posts'
+	ordering = ['-date_posted']
+	paginate_by = 5
+
+	def get_queryset(self):
+		user = self.request.user
+		return Post.objects.filter(author=user).order_by('-date_posted')
+
+	
 
 

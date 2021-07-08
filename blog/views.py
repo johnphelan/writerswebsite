@@ -9,7 +9,8 @@ from django.views.generic import (
 	 DeleteView
  )
 from .models import Post
-
+from django.apps import apps
+Profile = apps.get_model('users', 'Profile')
 
 def home(request):
 	context = {
@@ -33,10 +34,16 @@ class UserPostListView(ListView):
 	context_object_name = 'posts'
 	ordering = ['-date_posted']
 	paginate_by = 5
-
+	
 	def get_queryset(self):
 		user = get_object_or_404(User, username=self.kwargs.get('username'))
 		return Post.objects.filter(author=user).order_by('-date_posted')
+
+	#def get_context_data(self, **kwargs):
+	#	context = super().get_context_data(**kwargs)
+	#	user_profile = get_object_or_404(Profile, username=self.kwargs.get('user'))
+	#	context['user_profile'] = user_profile
+	#	return context
 
 
 class PostDetailView(DetailView):
@@ -79,5 +86,3 @@ def about(request):
 	return render(request, 'blog/about.html',{'title': 'About'})
 
 
-def display_lightpics(request):
-	 return False

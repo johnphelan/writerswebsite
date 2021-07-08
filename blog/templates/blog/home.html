@@ -1,5 +1,20 @@
 {% extends "blog/base.html" %}
 {% block content %}
+<h1 class= "strong"> WELCOME TO BOOK INC. </h2>
+<br>
+	<div class="row">
+		<div class="column left">
+			<img class="square" src="https://phelanstorage1.s3.us-east-2.amazonaws.com/norwegianfjords.jpg" width="150" height="100">
+		</div>
+		<div class="column right">
+			<div class="wrapper">
+				<h5><strong> "We give writers strong opportunities"</strong></h5>
+			</div>
+			<br>
+		</div>
+	</div>
+	<br><br><br>
+	<h2> MEMBER POSTS </h2>
 	{% for post in posts %}
 		<article class="media content-section">
 		  <img class="square article-img" src="{{ post.author.profile.image.url }}">
@@ -32,4 +47,18 @@
 		{% endif %}
 
 	{% endif %}
+
+	<br>
+  {% if user.is_authenticated %}
+	  <div class="inline">
+			<a class="button" href="{% url 'post-create' %}">New Post</a>
+	    <a class="nav-item nav-link" href="{% url 'profileview' %}"> Profile </a>
+	    <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+	  </div>
+  {% else %}
+	  <div class="inline">
+	    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+	    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+	  </div>
+  {% endif %}
 {% endblock content %}  

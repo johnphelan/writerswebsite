@@ -1,11 +1,22 @@
 {% extends "blog/base.html" %}
 {% block content %}
 {% load static %}
-<article class="media content-section">	
-	<h1>About Page</h1>
+	<h1>About Us</h1>
 		<div>
-			<img class="square" src="https://phelanstorage1.s3.us-east-2.amazonaws.com/northernlights.jpg">
+			<img class="square" src="https://phelanstorage1.s3.us-east-2.amazonaws.com/northernlights.jpg" width="150" height="100">
+			<br><br>
+
+			<h4> We are an up and coming group of writers in the BOOK INC. program.  We are affiliated with Project Write Now.  Please contact us if 
 		</div>
+
+	{% for profile in profiles %}
+
+		<h1>{{ user.username }}</h1>
+
+	{% endfor %}
+
+
+
 </article>
 
 {% endblock content %}

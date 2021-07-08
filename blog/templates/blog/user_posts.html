@@ -1,10 +1,30 @@
 {% extends "blog/base.html" %}
 {% block content %}
 	
-	<h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count}})</h1>
+	<hr size="30">
+	<div class="row">
+		<div class="column left">
+		{% for post in posts|slice:":1" %}
+				<img style= "float:left" src="{{ post.author.profile.image.url}}" width="125" height="125">
+		{% endfor %}
+
+		</div>
+		<div class="column right">
+			<div class="wrapper">
+				<h1 style="display:inline;text-align: left" class="mb-3"><strong> {{ view.kwargs.username }} &emsp; </strong></h1> 
+				<!--<a style="display:inline; " class="btn btn-outline-info mb-4" href="{% url 'editprofile' %}">Edit Profile</a> -->
+			</div>
+			<br>
+			<h3 style ="font-style:italic"> Bio: </h3>
+		{% for post in posts|slice:":1" %}
+			<h5 style="text-align: left;">{{ post.author.profile.bio }}</h5>
+		{% endfor %}
+		</div>
+	</div>
+	<h3> ({{ page_obj.paginator.count}}) posts </h3> <hr style="height:1px; visibility:hidden;" />
 	{% for post in posts %}
 		<article class="media content-section">
-		  <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+		  <img class="square article-img" src="{{ post.author.profile.image.url }}">
 		  <div class="media-body">
 		    <div class="article-metadata">
 		      <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
@@ -35,3 +55,8 @@
 
 	{% endif %}
 {% endblock content %}  
+
+
+<!---- {{ view.kwargs.username }}
+
+

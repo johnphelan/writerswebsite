@@ -1,8 +1,10 @@
   
 body {
+  font: 100% Georgia, serif;
   background: #fafafa;
   color: #333333;
-  margin-top: 5rem;
+  margin-top: 6rem;
+  line-height: 2;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -14,7 +16,7 @@ ul {
 }
 
 .bg-steel {
-  background-color: #5f788a;
+  background-color: #000000;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -34,7 +36,7 @@ ul {
   padding: 10px 20px;
   border: 1px solid #dddddd;
   border-radius: 3px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .article-title {
@@ -83,3 +85,77 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+
+.column.a {
+  float: left;
+  padding: 10px;
+  column-gap: 20px;
+ /* height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 40%;
+}
+
+.right {
+  width: 60%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: #008CBA; 
+  border: 2px solid #008CBA;
+}
+
+.button1:hover {
+  background-color: #008CBA;
+  color: white;
+
+}
+
+#block_container {
+    display: flex;
+    justify-content: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.inline {
+  display: inline-block; 
+}
+
