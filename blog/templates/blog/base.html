@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
-
+   
     {% if title %}
         <title>book inc - {{ title }}</title>
     {% else %}
@@ -59,7 +59,7 @@
           {% endif %}
           {% block content %}{% endblock %}
         </div>
-        <div class="col-md-4">
+        <div class="col-3">
           <div class="content-section">
             <a class="twitter-timeline" href="https://twitter.com/ProjectWriteNow?ref_src=twsrc%5Etfw" data-width="300" data-height="900">Tweets by ProjectWriteNow
             </a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

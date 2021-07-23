@@ -12,6 +12,16 @@ class Profile(models.Model):
 		return f'{self.user.username} Profile'
 
 
+class Social(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+	title = models.CharField(max_length=200)
+	link = models.URLField(max_length=200, blank=True, default='') 
+	
+
+	def __str__(self):
+		return self.title
+
+
 	#def save(self):
 	#	super().save()
 	#

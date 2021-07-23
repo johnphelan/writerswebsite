@@ -3,15 +3,21 @@
 	
 	<hr size="30">
 	<div class="row">
+		<h1> {{ posts }} </h1>
+		<h1> {{ view.kwargs.username }} </h1>
+		{% if user == view.kwargs.username %}
+			<h1> {{user}} </h1>
+		{% endif %} 
 		<div class="column left">
 		{% for post in posts|slice:":1" %}
-				<img style= "float:left" src="{{ post.author.profile.image.url}}" width="125" height="125">
+				<img style= "float:left" src="{{ post.author.profile.image.url }}" width="200" height="200">
 		{% endfor %}
+
 
 		</div>
 		<div class="column right">
 			<div class="wrapper">
-				<h1 style="display:inline;text-align: left" class="mb-3"><strong> {{ view.kwargs.username }} &emsp; </strong></h1> 
+				<h3 style="display:inline;text-align: left" class="mb-3"><strong> {{ view.kwargs.username }} &emsp; </strong></h3> 
 				<!--<a style="display:inline; " class="btn btn-outline-info mb-4" href="{% url 'editprofile' %}">Edit Profile</a> -->
 			</div>
 			<br>

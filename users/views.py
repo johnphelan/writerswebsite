@@ -1,9 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
+
+
+from django.urls import reverse_lazy
+from .models import Social
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+
 from .forms import(
 	 UserRegisterForm,
 	 UserUpdateForm,
@@ -78,6 +86,13 @@ class ProfileListView(ListView):
 		user = self.request.user
 		return Post.objects.filter(author=user).order_by('-date_posted')
 
-	
 
+class CreateSocial(LoginRequiredMixin, CreateView):
+	model = Social
+	fields = ['title', 'link']
+	success_url = reverse_lazy('editprofile')
+
+	def form_valid(self, form):
+		form.instance.user = self.request.user
+		return super(CreateSocial, self).form_valid(form)
 

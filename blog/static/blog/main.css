@@ -85,21 +85,26 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
-
-.column.a {
+ 
+.column {
   float: left;
   padding: 10px;
-  column-gap: 20px;
+  column-gap: 100px;
+  border-spacing:100px;
+
  /* height: 300px; /* Should be removed. Only for demonstration */
 }
 
 .left {
-  width: 40%;
+  width: 50%;
+  float: left;
 }
 
 .right {
-  width: 60%;
+  width: 50%;
+  float: right;
 }
+
 .row:after {
   content: "";
   display: table;
@@ -107,7 +112,43 @@ a.article-title:hover {
 }
 
 .wrapper {
-  display: flex;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 200px 200px 200px;
+    grid-auto-rows: 200px
+    background-color: #fff;
+    color: #444;
+  }
+
+  .box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+
+  }
+
+  .a {
+    grid-column: 1 ;
+    grid-row: 1;
+  }
+  .b {
+    grid-column: 2 ;
+    grid-row: 1 / 3;
+  }
+  .c {
+    grid-column: 1 ;
+    grid-row: 2 ;
+  }
+  .d {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+
+.wrapper > div img {
+  max-width: 100%;
 }
 
 .button {
@@ -128,11 +169,13 @@ a.article-title:hover {
   background-color: white; 
   color: #008CBA; 
   border: 2px solid #008CBA;
+  white-space: nowrap;
 }
 
 .button1:hover {
   background-color: #008CBA;
   color: white;
+  white-space: nowrap;
 
 }
 
