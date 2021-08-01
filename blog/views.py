@@ -11,6 +11,7 @@ from django.views.generic import (
 from .models import Post
 from django.apps import apps
 Profile = apps.get_model('users', 'Profile')
+Social = apps.get_model('users', 'Social')
 
 def home(request):
 	context = {
@@ -41,8 +42,16 @@ class UserPostListView(ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super(UserPostListView, self).get_context_data(**kwargs)
+		s_user  = get_object_or_404(User, username=self.kwargs.get('username'))
+		#profile = get_object_or_404(Profile, user=s_user)
+		#context[profile] = profile
+		#context[s_user] = s_user
+		S_Social = Social.objects.filter(user=s_user)
 		context.update({
-			'profile':Profile.objects.filter(user=self.request.user),
+			'profile':get_object_or_404(Profile, user=s_user),
+			's_user':s_user,
+			'social':Social.objects.filter(user=s_user),
+			'S_Social':S_Social,
 			})
 
 		return context
@@ -87,3 +96,22 @@ def about(request):
 	return render(request, 'blog/about.html',{'title': 'About'})
 
 
+def incubators(request):
+	return render(request, 'blog/incubators.html',{'title': 'Incubators'})
+
+
+class MembersView(ListView):
+	model = User
+	template_name = 'blog/members.html' # <app>/<model>_<viewtype>.html
+	
+	def get_context_data(self, **kwargs):
+		context = super(MembersView, self).get_context_data(**kwargs)
+
+		members =[]
+		for member in User.objects.order_by('last_name'):
+			members.append(member)
+		
+		context.update({
+			'members':members,
+			})
+		return context

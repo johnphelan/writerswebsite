@@ -3,28 +3,51 @@
 	
 	<hr size="30">
 	<div class="row">
-		<h1> {{ posts }} </h1>
-		<h1> {{ view.kwargs.username }} </h1>
-		{% if user == view.kwargs.username %}
-			<h1> {{user}} </h1>
-		{% endif %} 
+		
+		
 		<div class="column left">
-		{% for post in posts|slice:":1" %}
-				<img style= "float:left" src="{{ post.author.profile.image.url }}" width="200" height="200">
-		{% endfor %}
+				<img style= "float:left" src="{{ s_user.profile.image.url }}" width="200" height="200">
+				<br> <br> <br> <br> <br> <br> <br>
+				<div>
+					{% if s_user.profile.instagram %}
+						<h6> <a href="https://www.instagram.com/{{s_user.profile.instagram}}"><img src="https://phelanstorage1.s3.us-east-2.amazonaws.com/socialmediaicons/instapic.png" width="50" height="50"> </a> </h6>
+					{% endif %}
+				</div>
+				<div>
+					{% if s_user.profile.twitter %}
+						<h6> <a href="https://twitter.com/{{s_user.profile.twitter }}"><img src="https://phelanstorage1.s3.us-east-2.amazonaws.com/socialmediaicons/twittapic.png" width="50" height="50"> </a> </h6>
+					{% endif %}
+				</div>
+				<div>
+					{% if s_user.profile.facebook %}
+						<h6> <a href="https://www.facebook.com/{{s_user.profile.facebook}}"><img src="https://phelanstorage1.s3.us-east-2.amazonaws.com/socialmediaicons/facebookpic.png" width="50" height="50"> </a> </h6>
+					{% endif %}
+				</div>
+				<div>
+					{% if s_user.profile.linkedin %}
+						<h6> <a href="https://www.linkedin.com/in/{{s_user.profile.linkedin }}"><img src="https://phelanstorage1.s3.us-east-2.amazonaws.com/socialmediaicons/linkapic.png" width="50" height="50"> </a> </h6>
+					{% endif %}
+				</div>
 
 
+
+				<div>
+					{% for x in S_Social %}
+						<h6> <a href="{{ x.link }}">{{ x }} </a> </h6>
+					{% endfor %}
+				</div>
 		</div>
 		<div class="column right">
 			<div class="wrapper">
-				<h3 style="display:inline;text-align: left" class="mb-3"><strong> {{ view.kwargs.username }} &emsp; </strong></h3> 
-				<!--<a style="display:inline; " class="btn btn-outline-info mb-4" href="{% url 'editprofile' %}">Edit Profile</a> -->
+				<h3 style="display:inline;" class="mb-3"><strong> {{ s_user.first_name }} {{ s_user.last_name }} &emsp; </strong></h3> 
+				<!--<a style="display:inline; " class="btn btn-outline-info mb-4" href="{% url 'editprofile' %}">Edit Profile</a> -->	
 			</div>
+				{% if s_user == user %}
+					<a href="{% url 'editprofile' %}" class="button button1" style="text-decoration: none;height:65px;" >edit profile</a> 
+				{% endif %}
 			<br>
 			<h3 style ="font-style:italic"> Bio: </h3>
-		{% for post in posts|slice:":1" %}
-			<h5 style="text-align: left;">{{ post.author.profile.bio }}</h5>
-		{% endfor %}
+			<h5 style="text-align: left;">{{ s_user.profile.bio }}</h5>
 		</div>
 	</div>
 	<h3> ({{ page_obj.paginator.count}}) posts </h3> <hr style="height:1px; visibility:hidden;" />

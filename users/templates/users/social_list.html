@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+
+<h1> view social </h1>
+
+<div>
+	
+	{% for social in socials %}
+		<h2> {{ social }} </h2>
+		<a href="{{ social.link }}">{{ social }} </a>
+	{% endfor %}
+
+</div>
+
+
+
+{% endblock content %}

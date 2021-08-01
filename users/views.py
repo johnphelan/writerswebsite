@@ -32,7 +32,7 @@ def register(request):
 				form1.save()
 				username = form1.cleaned_data.get('username')
 				messages.success(request, f'Your account has been created! Login in pls!')
-				return redirect('login')
+				return redirect('blog-home')
 			else:
 				messages.warning(request,f'WRONG ACCESS CODE')
 	else:
@@ -96,3 +96,13 @@ class CreateSocial(LoginRequiredMixin, CreateView):
 		form.instance.user = self.request.user
 		return super(CreateSocial, self).form_valid(form)
 
+class ViewSocial(LoginRequiredMixin, ListView):
+
+	model = Social
+	context_object_name = 'socials'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['socials'] = context['socials'].filter(user=self.request.user)
+
+		return context

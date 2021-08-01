@@ -25,6 +25,7 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('editprofile/', user_views.profile, name='editprofile'),
     path('create-social', user_views.CreateSocial.as_view(), name='createsocial'),
+    path('view-social', user_views.ViewSocial.as_view(), name='viewsocial'),
     path('profile/', login_required(user_views.ProfileListView.as_view()), name='profileview'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),

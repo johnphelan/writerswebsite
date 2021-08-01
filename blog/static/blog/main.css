@@ -112,7 +112,7 @@ a.article-title:hover {
 }
 
 .wrapper {
-    display: grid;
+    display: inline-flex;
     grid-gap: 10px;
     grid-template-columns: 200px 200px 200px;
     grid-auto-rows: 200px
@@ -200,5 +200,15 @@ a.article-title:hover {
 
 .inline {
   display: inline-block; 
+}
+
+
+.hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;               
+  background-color:#FFFF00;
+  height: 1px;
 }
 

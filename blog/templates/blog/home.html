@@ -52,7 +52,7 @@
   {% if user.is_authenticated %}
 	  <div class="inline">
 		<a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
-	    <a class="nav-item nav-link" href="{% url 'profileview' %}"> Profile </a>
+	    <a class="nav-item nav-link" href="{% url 'user-posts' user.username %}"> Profile </a>
 	    <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
 	  </div>
   {% else %}

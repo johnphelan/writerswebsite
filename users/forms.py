@@ -8,7 +8,7 @@ class UserRegisterForm(UserCreationForm):
 
 	class Meta:
 		model = User
-		fields = ['username', 'email', 'password1', 'password2']
+		fields = ['first_name','last_name','username', 'email', 'password1', 'password2']
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -26,7 +26,7 @@ class BiographyForm(forms.ModelForm):
 
 	class Meta:
 		model = Profile
-		fields = ['bio']
+		fields = ['bio', 'instagram', 'twitter', 'facebook', 'linkedin']
 
 class AccessCodeForm(forms.Form):
 	accesscode = forms.CharField(label='ACCESS CODE', max_length=100)
